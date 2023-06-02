@@ -19,7 +19,6 @@ namespace ShoppingCart.Core.Entities
         public Manufacturer Manufacturer { get; private set; }
         public Price Price { get; private set; }
 
-
         public override string ToString()
         {
             return Name.ToString();
