@@ -7,6 +7,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Handlers\**" />
+	  <EmbeddedResource Remove="Handlers\**" />
+	  <None Remove="Handlers\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Ardalis.GuardClauses" Version="4.0.1" />
 		<PackageReference Include="MediatR" Version="12.0.1" />
 	</ItemGroup>
@@ -17,8 +23,6 @@
 
 	<ItemGroup>
 		<Folder Include="CartAggregate\Specifications\" />
-		<Folder Include="Handlers\Cart\Commands\" />
-		<Folder Include="Handlers\Cart\Queries\" />
 	</ItemGroup>
 
 </Project>
