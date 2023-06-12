@@ -1,7 +1,6 @@
 ﻿using MediatR;
-using ShoppingCart.Core.CartAggregate;
 
-namespace ShoppingCart.Api.Commands
+namespace ShoppingCart.BusinessLogic.Commands
 {
     public class AddCartCommand : IRequest<Guid>
     {

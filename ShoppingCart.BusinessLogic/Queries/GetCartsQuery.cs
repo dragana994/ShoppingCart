@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using ShoppingCart.Core.CartAggregate;
 
-namespace ShoppingCart.Api.Queries
+namespace ShoppingCart.BusinessLogic.Queries
 {
     public class GetCartsQuery : IRequest<IEnumerable<Cart>>
     {

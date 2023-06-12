@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using ShoppingCart.Api.Commands;
-using ShoppingCart.Api.Queries;
+using ShoppingCart.BusinessLogic.Commands;
+using ShoppingCart.BusinessLogic.Queries;
 
 namespace ShoppingCart.Api.Extensions
 {

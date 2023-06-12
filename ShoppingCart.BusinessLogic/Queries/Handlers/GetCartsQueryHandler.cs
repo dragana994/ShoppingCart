@@ -1,10 +1,9 @@
 ﻿using MediatR;
-using ShoppingCart.Api.Queries;
 using ShoppingCart.Core.CartAggregate;
 
-namespace ShoppingCart.Api.Handlers
+namespace ShoppingCart.BusinessLogic.Queries.Handlers
 {
-    public class GetCartsHandler : IRequestHandler<GetCartsQuery, IEnumerable<Cart>>
+    public class GetCartsQueryHandler : IRequestHandler<GetCartsQuery, IEnumerable<Cart>>
     {
         public Task<IEnumerable<Cart>> Handle(GetCartsQuery request, CancellationToken cancellationToken)
         {
