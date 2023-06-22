@@ -1,9 +1,10 @@
 ﻿using MediatR;
+using ShoppingCart.Core.CartAggregate;
 
 namespace ShoppingCart.BusinessLogic.Commands
 {
-    public class AddCartCommand : IRequest<Guid>
+    public class AddCartCommand : IRequest<Cart>
     {
-        public int UserId { get; private set; }
+        public int UserId { get;  set; }
     }
 }

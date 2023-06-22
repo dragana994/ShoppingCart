@@ -13,6 +13,8 @@ namespace ShoppingCart.Core.CartAggregate
             CreatedDate = DateTime.UtcNow;
         }
 
+        public Cart() { }
+
         public int UserId { get; private set; }
         public DateTime CreatedDate { get; private set; }
         public bool IsExpired { get; private set; }

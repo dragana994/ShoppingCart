@@ -1,12 +1,23 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
+using ShoppingCart.Core.CartAggregate;
 
 namespace ShoppingCart.BusinessLogic.Commands.Handlers
 {
-    public class AddCartCommandHandler : IRequestHandler<AddCartCommand, Guid>
+    public class AddCartCommandHandler : IRequestHandler<AddCartCommand, Cart>
     {
-        public async Task<Guid> Handle(AddCartCommand request, CancellationToken cancellationToken)
+        private readonly IMapper _mapper;
+
+        public AddCartCommandHandler(IMapper mapper)
         {
-            return Guid.NewGuid();
+            _mapper = mapper;
+        }
+
+        public async Task<Cart> Handle(AddCartCommand command, CancellationToken cancellationToken)
+        {
+            var cartToAdd = _mapper.Map<Cart>(command);
+
+            return cartToAdd;
         }
     }
 }

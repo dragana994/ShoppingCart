@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="12.0.1" />
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <Folder Include="Requests\" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ShoppingCart.BusinessLogic\ShoppingCart.BusinessLogic.csproj" />
     <ProjectReference Include="..\ShoppingCart.Core\ShoppingCart.Core.csproj" />
   </ItemGroup>
 

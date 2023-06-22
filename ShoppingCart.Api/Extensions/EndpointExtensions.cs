@@ -1,6 +1,9 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using ShoppingCart.Api.Requests;
 using ShoppingCart.BusinessLogic.Commands;
-using ShoppingCart.BusinessLogic.Queries;
+using ShoppingCart.Core.CartAggregate;
 
 namespace ShoppingCart.Api.Extensions
 {
@@ -8,16 +11,17 @@ namespace ShoppingCart.Api.Extensions
     {
         public static void MapEndpoints(this WebApplication app)
         {
-            app.MapGet("/cart", async (IMediator mediator, [AsParameters] GetCartsQuery query) =>
+            /*app.MapGet("/cart", async (IMediator mediator, [AsParameters] GetCartsQuery query) =>
             {
                 var carts = await mediator.Send(query);
                 return Results.Ok(carts);
-            });
+            });*/
 
-            app.MapPost("/cart", async (IMediator mediator, [AsParameters] AddCartCommand command) =>
+            app.MapPost("/cart", async (IMediator mediator, IMapper mapper,[FromBody] AddCartRequest request) =>
             {
-                var guid = await mediator.Send(command);
-                return Results.Ok(guid);
+                var command = mapper.Map<AddCartCommand>(request);
+                var cart = await mediator.Send(command);
+                return Results.Ok(cart);
             });
         }
 
