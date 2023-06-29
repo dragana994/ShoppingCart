@@ -1,5 +1,8 @@
+using Microsoft.Extensions.DependencyInjection;
 using ShoppingCart.Api.Extensions;
 using ShoppingCart.BusinessLogic.Commands;
+using ShoppingCart.Infrastracture.Persistence;
+using System.Runtime;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +16,7 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AddCa
 builder.Services.AddAutoMapper(
     typeof(Program).Assembly,
     typeof(AddCartCommand).Assembly);
+builder.Services.Configure<AppDbContext>(builder.Configuration.GetSection("DefaultConnection"));
 
 var app = builder.Build();
 

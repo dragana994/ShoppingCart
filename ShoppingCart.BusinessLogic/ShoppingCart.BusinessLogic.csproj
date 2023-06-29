@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ShoppingCart.Core\ShoppingCart.Core.csproj" />
+    <ProjectReference Include="..\ShoppingCart.Infrastracture\ShoppingCart.Infrastracture.csproj" />
   </ItemGroup>
 
 </Project>
