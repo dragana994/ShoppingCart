@@ -1,4 +1,5 @@
 ﻿using Ardalis.GuardClauses;
+using ShoppingCart.Core.Enums;
 using ShoppingCart.SharedKernel;
 using ShoppingCart.SharedKernel.Interfaces;
 
@@ -17,7 +18,7 @@ namespace ShoppingCart.Core.CartAggregate
 
         public int UserId { get; private set; }
         public DateTime CreatedDate { get; private set; }
-        public bool IsExpired { get; private set; }
+        public Status Status { get; private set; }
         public decimal Sum { get; private set; }
 
 

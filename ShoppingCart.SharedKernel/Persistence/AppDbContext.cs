@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ShoppingCart.Core.CartAggregate;
-using ShoppingCart.Core.Entities;
+using Microsoft.Extensions.Configuration;
+using ShoppingCart.SharedKernel.Persistence.Entities;
 using System.Reflection;
 
 namespace ShoppingCart.Infrastracture.Persistence
@@ -9,12 +9,23 @@ namespace ShoppingCart.Infrastracture.Persistence
     {
         public DbSet<Cart> Carts { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Employee> Employees { get; set; }
         public DbSet<Part> Parts { get; set; }
         public DbSet<Store> Stores { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<StoreState> StoreStates { get; set; }
 
-        public AppDbContext(DbContextOptions options) : base(options)
+        protected readonly IConfiguration Configuration;
+
+        public AppDbContext(IConfiguration configuration)
         {
+            Configuration = configuration;
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        {
+            // connect to postgres with connection string from app settings
+            options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

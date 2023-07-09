@@ -4,6 +4,8 @@ namespace ShoppingCart.Core.Entities
 {
     public class User : BaseEntity<int>
     {
+        //zaposleni
+        // + customer
         public User(int id, string name, int storeId)
         {
             Id = id;
