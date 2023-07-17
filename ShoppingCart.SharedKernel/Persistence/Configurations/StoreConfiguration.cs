@@ -15,12 +15,12 @@ namespace ShoppingCart.SharedKernel.Persistence.Configurations
                 .IsRequired()
                 .HasMaxLength(50);
 
-            builder.OwnsOne(x => x.Residence, x =>
+            builder.OwnsOne(x => x.Address, x =>
             {
-                x.Property(pp => pp.Country).HasColumnName("ResidenceCountry").HasMaxLength(50).IsRequired();
-                x.Property(pp => pp.City).HasColumnName("ResidenceCity").HasMaxLength(50).IsRequired();
-                x.Property(pp => pp.Street).HasColumnName("ResidenceStreet").HasMaxLength(50).IsRequired();
-                x.Property(pp => pp.Number).HasColumnName("ResidenceNumber").HasMaxLength(5).IsRequired();
+                x.Property(pp => pp.Country).HasColumnName("Address_Country").HasMaxLength(50).IsRequired();
+                x.Property(pp => pp.City).HasColumnName("Address_City").HasMaxLength(50).IsRequired();
+                x.Property(pp => pp.Street).HasColumnName("Address_Street").HasMaxLength(50).IsRequired();
+                x.Property(pp => pp.Number).HasColumnName("Address_Number").HasMaxLength(5).IsRequired();
             });
         }
     }

@@ -14,6 +14,13 @@ namespace ShoppingCart.SharedKernel.Persistence.Configurations
             builder.Property(x => x.Name)
                 .IsRequired()
                 .HasMaxLength(50);
+
+            builder.OwnsMany(p => p.Addresses, a =>
+            {
+                a.WithOwner().HasForeignKey("CustomerId");
+                a.Property<int>("Id");
+                a.HasKey("Id");
+            });
         }
     }
 }

@@ -22,46 +22,6 @@ namespace ShoppingCart.SharedKernel.Persistence.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("ShoppingCart.SharedKernel.Persistence.Entities.Address", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("character varying(5)");
-
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("integer");
-
-                    b.Property<bool>("IsPrimary")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Number")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Street")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
-
-                    b.ToTable("Address", (string)null);
-                });
-
             modelBuilder.Entity("ShoppingCart.SharedKernel.Persistence.Entities.Cart", b =>
                 {
                     b.Property<Guid>("Id")
@@ -219,17 +179,6 @@ namespace ShoppingCart.SharedKernel.Persistence.Migrations
                     b.ToTable("StoreState", (string)null);
                 });
 
-            modelBuilder.Entity("ShoppingCart.SharedKernel.Persistence.Entities.Address", b =>
-                {
-                    b.HasOne("ShoppingCart.SharedKernel.Persistence.Entities.Customer", "Customer")
-                        .WithMany("Addresses")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
-                });
-
             modelBuilder.Entity("ShoppingCart.SharedKernel.Persistence.Entities.Cart", b =>
                 {
                     b.HasOne("ShoppingCart.SharedKernel.Persistence.Entities.Customer", "Customer")
@@ -292,6 +241,48 @@ namespace ShoppingCart.SharedKernel.Persistence.Migrations
 
                     b.Navigation("Price")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ShoppingCart.SharedKernel.Persistence.Entities.Customer", b =>
+                {
+                    b.OwnsMany("ShoppingCart.SharedKernel.Persistence.ValueObjects.Address", "Addresses", b1 =>
+                        {
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer");
+
+                            NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b1.Property<int>("Id"));
+
+                            b1.Property<string>("City")
+                                .IsRequired()
+                                .HasColumnType("text");
+
+                            b1.Property<string>("Country")
+                                .IsRequired()
+                                .HasColumnType("text");
+
+                            b1.Property<int>("CustomerId")
+                                .HasColumnType("integer");
+
+                            b1.Property<string>("Number")
+                                .IsRequired()
+                                .HasColumnType("text");
+
+                            b1.Property<string>("Street")
+                                .IsRequired()
+                                .HasColumnType("text");
+
+                            b1.HasKey("Id");
+
+                            b1.HasIndex("CustomerId");
+
+                            b1.ToTable("Customer_Addresses");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CustomerId");
+                        });
+
+                    b.Navigation("Addresses");
                 });
 
             modelBuilder.Entity("ShoppingCart.SharedKernel.Persistence.Entities.Employee", b =>
@@ -358,7 +349,7 @@ namespace ShoppingCart.SharedKernel.Persistence.Migrations
 
             modelBuilder.Entity("ShoppingCart.SharedKernel.Persistence.Entities.Store", b =>
                 {
-                    b.OwnsOne("ShoppingCart.SharedKernel.Persistence.ValueObjects.Residence", "Residence", b1 =>
+                    b.OwnsOne("ShoppingCart.SharedKernel.Persistence.ValueObjects.Address", "Address", b1 =>
                         {
                             b1.Property<int>("StoreId")
                                 .HasColumnType("integer");
@@ -367,25 +358,25 @@ namespace ShoppingCart.SharedKernel.Persistence.Migrations
                                 .IsRequired()
                                 .HasMaxLength(50)
                                 .HasColumnType("character varying(50)")
-                                .HasColumnName("ResidenceCity");
+                                .HasColumnName("Address_City");
 
                             b1.Property<string>("Country")
                                 .IsRequired()
                                 .HasMaxLength(50)
                                 .HasColumnType("character varying(50)")
-                                .HasColumnName("ResidenceCountry");
+                                .HasColumnName("Address_Country");
 
                             b1.Property<string>("Number")
                                 .IsRequired()
                                 .HasMaxLength(5)
                                 .HasColumnType("character varying(5)")
-                                .HasColumnName("ResidenceNumber");
+                                .HasColumnName("Address_Number");
 
                             b1.Property<string>("Street")
                                 .IsRequired()
                                 .HasMaxLength(50)
                                 .HasColumnType("character varying(50)")
-                                .HasColumnName("ResidenceStreet");
+                                .HasColumnName("Address_Street");
 
                             b1.HasKey("StoreId");
 
@@ -395,7 +386,7 @@ namespace ShoppingCart.SharedKernel.Persistence.Migrations
                                 .HasForeignKey("StoreId");
                         });
 
-                    b.Navigation("Residence")
+                    b.Navigation("Address")
                         .IsRequired();
                 });
 
@@ -425,8 +416,6 @@ namespace ShoppingCart.SharedKernel.Persistence.Migrations
 
             modelBuilder.Entity("ShoppingCart.SharedKernel.Persistence.Entities.Customer", b =>
                 {
-                    b.Navigation("Addresses");
-
                     b.Navigation("Carts");
                 });
 

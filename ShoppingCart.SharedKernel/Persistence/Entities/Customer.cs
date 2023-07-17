@@ -1,4 +1,6 @@
-﻿namespace ShoppingCart.SharedKernel.Persistence.Entities
+﻿using ShoppingCart.SharedKernel.Persistence.ValueObjects;
+
+namespace ShoppingCart.SharedKernel.Persistence.Entities
 {
     public class Customer : BaseEntity<int>
     {
