@@ -5,6 +5,7 @@ namespace ShoppingCart.BusinessLogic.Commands
 {
     public class AddCartCommand : IRequest<Cart>
     {
-        public int UserId { get;  set; }
+        public int EmployeeId { get; set; }
+        public int CustomerId { get; set; }
     }
 }

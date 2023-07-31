@@ -14,7 +14,7 @@ namespace ShoppingCart.Infrastracture.Persistence
             _context = context;
         }
 
-        public async Task<T> GetByIdAsync(TId id)
+        public async Task<T?> GetByIdAsync(TId id)
         {
             return await _context.Set<T>().FindAsync(id);
         }
@@ -36,17 +36,15 @@ namespace ShoppingCart.Infrastracture.Persistence
             return result.Entity;
         }
 
-        public async Task<T> UpdateAsync(T entity)
+        public T Update(T entity)
         {
-            //TODO fix
             var result = _context.Set<T>().Update(entity);
 
             return result.Entity;
         }
 
-        public async Task DeleteAsync(T entity)
+        public void Delete(T entity)
         {
-            //TODO fix
             _context.Set<T>().Remove(entity);
         }
     }

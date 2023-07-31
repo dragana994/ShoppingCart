@@ -7,7 +7,7 @@ namespace ShoppingCart.SharedKernel.Persistence.Entities
         public int EmployeeId { get; set; }
         public int CustomerId { get; set; }
         public DateTime CreatedDate { get; set; }
-        public Status Status { get; set; }
+        public CartStatus Status { get; set; }
         public decimal Sum { get; set; }
 
         public virtual Employee Employee { get; set; }

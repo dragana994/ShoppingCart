@@ -1,6 +1,6 @@
 ﻿namespace ShoppingCart.Core.Enums
 {
-    public enum Status
+    public enum CartStatus
     {
         Created,
         Deleted,

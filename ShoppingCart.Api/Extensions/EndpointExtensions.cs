@@ -3,7 +3,6 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingCart.Api.Requests;
 using ShoppingCart.BusinessLogic.Commands;
-using ShoppingCart.Core.CartAggregate;
 
 namespace ShoppingCart.Api.Extensions
 {
@@ -17,10 +16,11 @@ namespace ShoppingCart.Api.Extensions
                 return Results.Ok(carts);
             });*/
 
-            app.MapPost("/cart", async (IMediator mediator, IMapper mapper,[FromBody] AddCartRequest request) =>
+            app.MapPost("/cart", async (IMediator mediator, IMapper mapper, [FromBody] AddCartRequest request) =>
             {
                 var command = mapper.Map<AddCartCommand>(request);
                 var cart = await mediator.Send(command);
+
                 return Results.Ok(cart);
             });
         }

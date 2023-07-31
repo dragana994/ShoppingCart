@@ -1,6 +1,6 @@
 ﻿namespace ShoppingCart.SharedKernel.Persistence.Enums
 {
-    public enum Status
+    public enum CartStatus
     {
         Created,
         Deleted,

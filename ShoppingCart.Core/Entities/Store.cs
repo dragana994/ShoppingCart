@@ -1,5 +1,6 @@
 ﻿using ShoppingCart.Core.ValueObjects;
 using ShoppingCart.SharedKernel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ShoppingCart.Core.Entities
 {
@@ -13,10 +14,13 @@ namespace ShoppingCart.Core.Entities
             Address = address;
         }
 
+        public Store() { }
+
         public string Name { get; private set; }
         public Address Address { get; private set; }
 
-        // Parts + quantity
+        // Parts + quantity => StoreState
+        [NotMapped]
         public Dictionary<Part, int> Parts { get; private set; } = new Dictionary<Part, int>();
 
         public override string ToString()

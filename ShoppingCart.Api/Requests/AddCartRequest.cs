@@ -3,7 +3,8 @@
 namespace ShoppingCart.Api.Requests
 {
     public class AddCartRequest : BaseRequest
-    { 
-        public int UserId { get; set; }
+    {
+        public int EmployeeId { get; set; }
+        public int CustomerId { get; set; }
     }
 }

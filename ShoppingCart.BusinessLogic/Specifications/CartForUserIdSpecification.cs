@@ -5,6 +5,6 @@ namespace ShoppingCart.BusinessLogic.Specifications
 {
     public class CartForUserIdSpecification : BaseSpecification<Cart>
     {
-        public CartForUserIdSpecification(int userId) : base(x => x.UserId == userId) { }
+        public CartForUserIdSpecification(int employeeId) : base(x => x.EmployeeId == employeeId) { }
     }
 }

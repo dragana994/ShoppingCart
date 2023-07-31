@@ -14,6 +14,8 @@ namespace ShoppingCart.Core.CartAggregate
             Price = Guard.Against.Null(price, nameof(price));
         }
 
+        public CartItem() { }
+
         public Guid CartId { get; private set; }
         public int PartId { get; private set; }
         public int Quantity { get; private set; }

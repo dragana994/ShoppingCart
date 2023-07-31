@@ -1,6 +1,7 @@
 using ShoppingCart.Api.Extensions;
 using ShoppingCart.BusinessLogic.Commands;
 using ShoppingCart.Infrastracture.Persistence;
+using ShoppingCart.SharedKernel.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AddCartCommand).Assembly));
+builder.Services.AddTransient(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
+
 builder.Services.AddAutoMapper(
     typeof(Program).Assembly,
     typeof(AddCartCommand).Assembly);

@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using ShoppingCart.SharedKernel.Persistence.Entities;
+using ShoppingCart.Core.CartAggregate;
+using ShoppingCart.Core.Entities;
 using System.Reflection;
 
-namespace ShoppingCart.SharedKernel.Persistence
+namespace ShoppingCart.Infrastracture.Persistence
 {
     public class AppDbContext : DbContext
     {
@@ -13,7 +14,6 @@ namespace ShoppingCart.SharedKernel.Persistence
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Part> Parts { get; set; }
         public DbSet<Store> Stores { get; set; }
-        public DbSet<StoreState> StoreStates { get; set; }
 
         protected readonly IConfiguration Configuration;
 
@@ -36,6 +36,8 @@ namespace ShoppingCart.SharedKernel.Persistence
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             var result = base.SaveChangesAsync(cancellationToken);
+
+            //TODO Add logic
 
             return result;
         }

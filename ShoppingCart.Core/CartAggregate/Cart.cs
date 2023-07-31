@@ -7,18 +7,34 @@ namespace ShoppingCart.Core.CartAggregate
 {
     public class Cart : BaseEntity<Guid>, IAggregateRoot
     {
-        public Cart(Guid id, int userId, DateTime createdDate)
+        public Cart(Guid id, int employeeId, int customerId)
         {
             Id = Guard.Against.Default(id, nameof(id));
-            UserId = Guard.Against.NegativeOrZero(userId, nameof(userId));
+            EmployeeId = Guard.Against.NegativeOrZero(employeeId, nameof(employeeId));
+            CustomerId = Guard.Against.NegativeOrZero(customerId, nameof(customerId));
+
             CreatedDate = DateTime.UtcNow;
+            Status = CartStatus.Created;
+        }
+
+        public Cart(int employeeId, int customerId)
+        {
+            Id = Guid.NewGuid();
+
+
+            EmployeeId = Guard.Against.NegativeOrZero(employeeId, nameof(employeeId));
+            CustomerId = Guard.Against.NegativeOrZero(customerId, nameof(customerId));
+
+            CreatedDate = DateTime.UtcNow;
+            Status = CartStatus.Created;
         }
 
         public Cart() { }
 
-        public int UserId { get; private set; }
+        public int EmployeeId { get; set; }
+        public int CustomerId { get; set; }
         public DateTime CreatedDate { get; private set; }
-        public Status Status { get; private set; }
+        public CartStatus Status { get; private set; }
         public decimal Sum { get; private set; }
 
 
