@@ -32,6 +32,7 @@ namespace ShoppingCart.Infrastracture.Persistence
         public async Task<T> AddAsync(T entity)
         {
             var result = await _context.Set<T>().AddAsync(entity);
+            await _context.SaveChangesAsync();
 
             return result.Entity;
         }
@@ -39,6 +40,7 @@ namespace ShoppingCart.Infrastracture.Persistence
         public T Update(T entity)
         {
             var result = _context.Set<T>().Update(entity);
+            _context.SaveChanges();
 
             return result.Entity;
         }
@@ -46,6 +48,7 @@ namespace ShoppingCart.Infrastracture.Persistence
         public void Delete(T entity)
         {
             _context.Set<T>().Remove(entity);
+            _context.SaveChanges();
         }
     }
 }

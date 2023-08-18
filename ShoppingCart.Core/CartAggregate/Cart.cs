@@ -1,5 +1,6 @@
 ﻿using Ardalis.GuardClauses;
 using ShoppingCart.Core.Enums;
+using ShoppingCart.Core.Events;
 using ShoppingCart.SharedKernel;
 using ShoppingCart.SharedKernel.Interfaces;
 
@@ -21,7 +22,6 @@ namespace ShoppingCart.Core.CartAggregate
         {
             Id = Guid.NewGuid();
 
-
             EmployeeId = Guard.Against.NegativeOrZero(employeeId, nameof(employeeId));
             CustomerId = Guard.Against.NegativeOrZero(customerId, nameof(customerId));
 
@@ -34,12 +34,12 @@ namespace ShoppingCart.Core.CartAggregate
         public int EmployeeId { get; set; }
         public int CustomerId { get; set; }
         public DateTime CreatedDate { get; private set; }
-        public CartStatus Status { get; private set; }
-        public decimal Sum { get; private set; }
+        public CartStatus Status { get; set; }
+        public decimal Sum { get; set; }
 
 
         private readonly List<CartItem> _cartItems = new();
-        public IEnumerable<CartItem> Parts => _cartItems.AsReadOnly();
+        public IEnumerable<CartItem> CartItems => _cartItems.AsReadOnly();
 
         public void AddItem(CartItem item)
         {
@@ -49,7 +49,10 @@ namespace ShoppingCart.Core.CartAggregate
 
             _cartItems.Add(item);
 
-            //TODO
+            //TODO add logic for updating cart's sum
+
+            Events.Add(new CartItemAddedEvent(item));
+
         }
 
         public void DeleteItem(CartItem item)
@@ -61,7 +64,9 @@ namespace ShoppingCart.Core.CartAggregate
                 _cartItems.Remove(item);
             }
 
-            //TODO
+            //TODO add logic for updating cart's sum
+
+            Events.Add(new CartItemDeletedEvent(item));
         }
     }
 }

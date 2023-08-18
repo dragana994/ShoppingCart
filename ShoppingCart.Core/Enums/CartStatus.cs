@@ -3,7 +3,6 @@
     public enum CartStatus
     {
         Created,
-        Deleted,
         Expired
     }
 }

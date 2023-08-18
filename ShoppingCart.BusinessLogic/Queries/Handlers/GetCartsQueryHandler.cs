@@ -1,13 +1,23 @@
 ﻿using MediatR;
 using ShoppingCart.Core.CartAggregate;
+using ShoppingCart.SharedKernel.Interfaces;
 
 namespace ShoppingCart.BusinessLogic.Queries.Handlers
 {
     public class GetCartsQueryHandler : IRequestHandler<GetCartsQuery, IEnumerable<Cart>>
     {
-        public Task<IEnumerable<Cart>> Handle(GetCartsQuery request, CancellationToken cancellationToken)
+        private readonly IGenericRepository<Cart, Guid> _repository;
+
+        public GetCartsQueryHandler(IGenericRepository<Cart, Guid> repository)
         {
-            throw new NotImplementedException();
+            _repository = repository;
+        }
+
+        public async Task<IEnumerable<Cart>> Handle(GetCartsQuery request, CancellationToken cancellationToken)
+        {
+            var carts = await _repository.GetListAsync();
+
+            return carts;
         }
     }
 }

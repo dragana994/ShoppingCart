@@ -9,6 +9,7 @@ namespace ShoppingCart.Api.MappingProfiles
         public CartProfile()
         {
             CreateMap<AddCartRequest, AddCartCommand>();
+            CreateMap<ChangeCartStatusRequest, ChangeCartStatusCommand>();
         }
     }
 }
