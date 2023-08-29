@@ -34,7 +34,7 @@ namespace ShoppingCart.Core.CartAggregate
         public int EmployeeId { get; set; }
         public int CustomerId { get; set; }
         public DateTime CreatedDate { get; private set; }
-        public CartStatus Status { get; set; }
+        public CartStatus Status { get; private set; }
         public decimal Sum { get; set; }
 
 
@@ -67,6 +67,14 @@ namespace ShoppingCart.Core.CartAggregate
             //TODO add logic for updating cart's sum
 
             Events.Add(new CartItemDeletedEvent(item));
+        }
+
+        public bool ChangeStatus(CartStatus status)
+        {
+            // Add conditions
+            Status = status;
+
+            return true;
         }
     }
 }

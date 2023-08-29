@@ -13,6 +13,14 @@ namespace ShoppingCart.Core.CartAggregate
             Quantity = Guard.Against.NegativeOrZero(quantity, nameof(quantity));
         }
 
+        public CartItem(int partId, int quantity)
+        {
+            Id = Guid.NewGuid();
+
+            PartId = Guard.Against.NegativeOrZero(partId, nameof(partId));
+            Quantity = Guard.Against.NegativeOrZero(quantity, nameof(quantity));
+        }
+
         public CartItem() { }
 
         public Guid CartId { get; private set; }

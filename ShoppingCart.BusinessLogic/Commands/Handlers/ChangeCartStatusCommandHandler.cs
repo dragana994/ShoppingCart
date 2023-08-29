@@ -19,7 +19,7 @@ namespace ShoppingCart.BusinessLogic.Commands.Handlers
 
             if (cartToUpdate != null)
             {
-                cartToUpdate.Status = command.Status;
+                cartToUpdate.ChangeStatus(command.Status);
 
                 //TODO add conditions
                 _repository.Update(cartToUpdate);
