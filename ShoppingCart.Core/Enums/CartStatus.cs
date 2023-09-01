@@ -3,6 +3,7 @@
     public enum CartStatus
     {
         Created,
+        InProcess,
         Expired
     }
 }

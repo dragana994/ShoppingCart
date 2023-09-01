@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using ShoppingCart.Core.CartAggregate;
+using ShoppingCart.Core.Exceptions;
 using ShoppingCart.SharedKernel.Interfaces;
 
 namespace ShoppingCart.BusinessLogic.Commands.Handlers
@@ -18,12 +19,17 @@ namespace ShoppingCart.BusinessLogic.Commands.Handlers
             var cart = await _cartRepository.GetByIdAsync(command.CartId);
 
             if (cart == null)
-                throw new Exception(); //TODO
+            {
+                throw new DomainException($"Changing cart item quantity not successful! Not found a cart with id {command.CartId}");
+            }
 
-            var cartItem = cart.CartItems.FirstOrDefault(x => x.Id.Equals(command.CartItemId));
+            var cartItem = cart.CartItems
+                .FirstOrDefault(x => x.Id.Equals(command.CartItemId));
 
             if (cartItem == null)
-                throw new Exception(); //TODO
+            {
+                throw new DomainException($"Changing cart item quantity not successful! Not found a cart item with id {command.CartItemId} in the cart.");
+            }
 
             cartItem.UpdateQuantity(command.Quantity);
 

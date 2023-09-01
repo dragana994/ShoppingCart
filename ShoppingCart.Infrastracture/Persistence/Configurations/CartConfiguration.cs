@@ -17,9 +17,6 @@ namespace ShoppingCart.Infrastracture.Persistence.Configurations
                .HasConversion<int>()
                .IsRequired();
 
-            builder.Property(x => x.Sum)
-                .IsRequired();
-
             builder.Property(x => x.CustomerId)
                 .IsRequired();
 

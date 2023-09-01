@@ -29,15 +29,26 @@ namespace ShoppingCart.BusinessLogic.Tests.Tests
             };
 
             _mockRepository.Setup(r => r.AddAsync(It.IsAny<Cart>()))
-                .ReturnsAsync(new Cart
-                {
-                    EmployeeId = employeeId,
-                    CustomerId = customerId
-                });
+                .ReturnsAsync(new Cart(employeeId, customerId));
 
             var result = await commandHandler.Handle(command, CancellationToken.None);
 
             Assert.NotNull(result);
+        }
+
+        [Fact]
+        public async Task AddCart_ShouldNotAddedAsync()
+        {
+            var employeeId = -1;
+            var customerId = 2;
+
+            var command = new AddCartCommand
+            {
+                EmployeeId = employeeId,
+                CustomerId = customerId
+            };
+
+            await Assert.ThrowsAsync<ArgumentException>(() => commandHandler.Handle(command, CancellationToken.None));
         }
     }
 }

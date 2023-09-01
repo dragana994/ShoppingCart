@@ -6,19 +6,21 @@ namespace ShoppingCart.Core.CartAggregate
 {
     public class CartItem : BaseEntity<Guid>
     {
-        public CartItem(Guid id, int partId, int quantity)
+        public CartItem(Guid id, int partId, int quantity, Price price)
         {
             Id = Guard.Against.Default(id, nameof(id));
             PartId = Guard.Against.NegativeOrZero(partId, nameof(partId));
             Quantity = Guard.Against.NegativeOrZero(quantity, nameof(quantity));
+            Price = Guard.Against.Default(price, nameof(price));
         }
 
-        public CartItem(int partId, int quantity)
+        public CartItem(int partId, int quantity, Price price)
         {
             Id = Guid.NewGuid();
 
             PartId = Guard.Against.NegativeOrZero(partId, nameof(partId));
             Quantity = Guard.Against.NegativeOrZero(quantity, nameof(quantity));
+            Price = Guard.Against.Default(price, nameof(price));
         }
 
         public CartItem() { }
@@ -35,10 +37,6 @@ namespace ShoppingCart.Core.CartAggregate
             if (newQunatity == Quantity) return;
 
             Quantity = newQunatity;
-
-            //TODO add logic to take a price from part
-
-            //TODO
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
 using ShoppingCart.Core.CartAggregate;
+using ShoppingCart.Core.Enums;
+using ShoppingCart.Core.Exceptions;
 using ShoppingCart.SharedKernel.Interfaces;
 
 namespace ShoppingCart.BusinessLogic.Commands.Handlers
@@ -16,15 +18,21 @@ namespace ShoppingCart.BusinessLogic.Commands.Handlers
             _repository = repository;
         }
 
-        public async Task<Unit> Handle(DeleteCartCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteCartCommand command, CancellationToken cancellationToken)
         {
-            var cartToDelete = await _repository.GetByIdAsync(request.Id);
+            var cartToDelete = await _repository.GetByIdAsync(command.Id);
 
-            //TODO add conditions when is OK to delete cart
-            if (cartToDelete != null)
+            if (cartToDelete == null)
             {
-                _repository.Delete(cartToDelete);
+                throw new DomainException($"Deleting cart not sucessful! Not found a cart with id {command.Id}");
             }
+
+            if (cartToDelete.Status != CartStatus.Created)
+            {
+                throw new DomainException($"Deleting cart not sucessful! Cart is already in process.");
+            }
+
+            _repository.Delete(cartToDelete);
 
             return Unit.Value;
         }

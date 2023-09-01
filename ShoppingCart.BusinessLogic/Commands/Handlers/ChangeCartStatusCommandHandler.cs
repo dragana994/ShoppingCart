@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using ShoppingCart.Core.CartAggregate;
+using ShoppingCart.Core.Exceptions;
 using ShoppingCart.SharedKernel.Interfaces;
 
 namespace ShoppingCart.BusinessLogic.Commands.Handlers
@@ -17,13 +18,14 @@ namespace ShoppingCart.BusinessLogic.Commands.Handlers
         {
             var cartToUpdate = await _repository.GetByIdAsync(command.Id);
 
-            if (cartToUpdate != null)
+            if (cartToUpdate == null)
             {
-                cartToUpdate.ChangeStatus(command.Status);
-
-                //TODO add conditions
-                _repository.Update(cartToUpdate);
+                throw new DomainException($"Changing status not sucessful! Not found a cart with id {command.Id}");
             }
+
+            cartToUpdate.ChangeStatus(command.Status);
+
+            _repository.Update(cartToUpdate);
 
             return cartToUpdate;
         }

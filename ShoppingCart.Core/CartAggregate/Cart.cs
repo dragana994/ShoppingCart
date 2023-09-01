@@ -1,4 +1,5 @@
 ﻿using Ardalis.GuardClauses;
+using ShoppingCart.Core.CartAggregate.Guards;
 using ShoppingCart.Core.Enums;
 using ShoppingCart.Core.Events;
 using ShoppingCart.SharedKernel;
@@ -31,50 +32,40 @@ namespace ShoppingCart.Core.CartAggregate
 
         public Cart() { }
 
-        public int EmployeeId { get; set; }
-        public int CustomerId { get; set; }
+        public int EmployeeId { get; private set; }
+        public int CustomerId { get; private set; }
         public DateTime CreatedDate { get; private set; }
         public CartStatus Status { get; private set; }
-        public decimal Sum { get; set; }
-
 
         private readonly List<CartItem> _cartItems = new();
         public IEnumerable<CartItem> CartItems => _cartItems.AsReadOnly();
 
         public void AddItem(CartItem item)
         {
-
             Guard.Against.Null(item, nameof(item));
             Guard.Against.Default(item.Id, nameof(item.Id));
+            Guard.Against.DuplicateCartItem(_cartItems, item);
 
             _cartItems.Add(item);
 
-            //TODO add logic for updating cart's sum
-
             Events.Add(new CartItemAddedEvent(item));
-
         }
 
         public void DeleteItem(CartItem item)
         {
             Guard.Against.Null(item, nameof(item));
+            Guard.Against.NotFoundCartItem(_cartItems, item);
 
-            if (_cartItems.Exists(i => i.Id == item.Id))
-            {
-                _cartItems.Remove(item);
-            }
-
-            //TODO add logic for updating cart's sum
+            _cartItems.Remove(item);
 
             Events.Add(new CartItemDeletedEvent(item));
         }
 
-        public bool ChangeStatus(CartStatus status)
+        public void ChangeStatus(CartStatus newStatus)
         {
-            // Add conditions
-            Status = status;
+            Guard.Against.ValidStatusChange(Status, newStatus);
 
-            return true;
+            Status = newStatus;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using ShoppingCart.Core.CartAggregate;
+using ShoppingCart.Core.Exceptions;
 using ShoppingCart.SharedKernel.Interfaces;
 
 namespace ShoppingCart.BusinessLogic.Commands.Handlers
@@ -16,24 +17,25 @@ namespace ShoppingCart.BusinessLogic.Commands.Handlers
             _cartRepository = cartRepository;
         }
 
-        public async Task<Unit> Handle(DeleteCartItemCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteCartItemCommand command, CancellationToken cancellationToken)
         {
-            var cart = await _cartRepository.GetByIdAsync(request.CartId);
+            var cart = await _cartRepository.GetByIdAsync(command.CartId);
 
-            //TODO add conditions when is OK to delete cart
-            if (cart != null)
+            if (cart == null)
             {
-                var cartItem = cart.CartItems.FirstOrDefault(x=>x.Id.Equals(request.CartId));
-
-                if (cartItem != null)
-                {
-                    cart.DeleteItem(cartItem);
-
-                    _cartRepository.Update(cart);
-                }
-
-                //TODO Handle Null error
+                throw new DomainException($"Deleting cart item not successful! Not found a cart with id {command.CartId}");
             }
+
+            var cartItem = cart.CartItems.FirstOrDefault(x => x.Id.Equals(command.CartId));
+
+            if (cartItem == null)
+            {
+                throw new DomainException($"Deleting cart item not successful! Not found a cart item with id {command.CartItemId} in the cart.");
+            }
+
+            cart.DeleteItem(cartItem);
+
+            _cartRepository.Update(cart);
 
             return Unit.Value;
         }

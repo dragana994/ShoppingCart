@@ -30,19 +30,9 @@ namespace ShoppingCart.BusinessLogic.Tests.Tests
                 Status = newCartStatus,
             };
 
-            repository.GetByIdAsync(cartId).Returns(new Cart
-            {
-                Id = cartId,
-                EmployeeId = 1,
-                CustomerId = 1
-            });
+            repository.GetByIdAsync(cartId).Returns(new Cart(cartId, 1, 1));
 
-            repository.Update(Arg.Any<Cart>()).Returns(new Cart
-            {
-                Id = cartId,
-                EmployeeId = 1,
-                CustomerId = 1
-            });
+            repository.Update(Arg.Any<Cart>()).Returns(new Cart(cartId, 1, 1));
 
             var result = await commandHandler.Handle(command, CancellationToken.None);
 

@@ -19,7 +19,6 @@ namespace ShoppingCart.BusinessLogic.Commands.Handlers
         public async Task<Cart> Handle(AddCartCommand command, CancellationToken cancellationToken)
         {
             var cartToAdd = _mapper.Map<Cart>(command);
-
             await _repository.AddAsync(cartToAdd);
 
             return cartToAdd;
