@@ -1,4 +1,6 @@
+using Microsoft.EntityFrameworkCore;
 using ShoppingCart.Api.Extensions;
+using ShoppingCart.Api.Middleware;
 using ShoppingCart.BusinessLogic.Commands;
 using ShoppingCart.Infrastracture.Persistence;
 using ShoppingCart.SharedKernel.Interfaces;
@@ -17,7 +19,10 @@ builder.Services.AddTransient(typeof(IGenericRepository<,>), typeof(GenericRepos
 builder.Services.AddAutoMapper(
     typeof(Program).Assembly,
     typeof(AddCartCommand).Assembly);
-builder.Services.AddDbContext<AppDbContext>();
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
 var app = builder.Build();
 
@@ -31,8 +36,11 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseMiddleware<ExceptionMiddleware>();
 
 //app.MapControllers();
 app.MapEndpoints();
 
 app.Run();
+
+public partial class Program { }

@@ -5,7 +5,7 @@ using ShoppingCart.Core.CartAggregate;
 using ShoppingCart.Core.Enums;
 using ShoppingCart.SharedKernel.Interfaces;
 
-namespace ShoppingCart.BusinessLogic.Tests.Tests
+namespace ShoppingCart.BusinessLogic.Tests.UnitTests
 {
     public class ChangeCartStatusTest : IClassFixture<FixtureTest>
     {

@@ -17,18 +17,11 @@ namespace ShoppingCart.Infrastracture.Persistence
         public DbSet<Part> Parts { get; set; }
         public DbSet<Store> Stores { get; set; }
 
-        protected readonly IConfiguration Configuration;
         private readonly IMediator _mediator;
 
-        public AppDbContext(IConfiguration configuration, IMediator mediator)
+        public AppDbContext(DbContextOptions options, IMediator mediator) : base(options)
         {
-            Configuration = configuration;
             _mediator = mediator;
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-        {
-            options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -51,7 +44,7 @@ namespace ShoppingCart.Infrastracture.Persistence
 
             foreach (var entity in entitiesWithEvents)
             {
-                var events = entity.Events.ToArray();
+                var events = entity!.Events.ToArray();
                 entity.Events.Clear();
                 foreach (var domainEvent in events)
                 {

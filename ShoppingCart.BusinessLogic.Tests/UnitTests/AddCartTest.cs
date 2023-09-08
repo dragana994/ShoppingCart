@@ -4,7 +4,7 @@ using ShoppingCart.BusinessLogic.Commands.Handlers;
 using ShoppingCart.Core.CartAggregate;
 using ShoppingCart.SharedKernel.Interfaces;
 
-namespace ShoppingCart.BusinessLogic.Tests.Tests
+namespace ShoppingCart.BusinessLogic.Tests.UnitTests
 {
     public class AddCartTest : IClassFixture<FixtureTest>
     {
@@ -37,7 +37,7 @@ namespace ShoppingCart.BusinessLogic.Tests.Tests
         }
 
         [Fact]
-        public async Task AddCart_ShouldNotAddedAsync()
+        public async Task AddCart_ShouldNotAdded()
         {
             var employeeId = -1;
             var customerId = 2;

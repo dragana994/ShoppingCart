@@ -4,7 +4,7 @@ using ShoppingCart.BusinessLogic.Commands.Handlers;
 using ShoppingCart.Core.CartAggregate;
 using ShoppingCart.SharedKernel.Interfaces;
 
-namespace ShoppingCart.BusinessLogic.Tests.Tests
+namespace ShoppingCart.BusinessLogic.Tests.UnitTests
 {
     public class AddCartItemTest : IClassFixture<FixtureTest>
     {

@@ -22,7 +22,7 @@ namespace ShoppingCart.Core.CartAggregate.Guards
             }
         }
 
-        public static void ValidStatusChange(this IGuardClause, CartStatus oldStatus, CartStatus newStatus)
+        public static void ValidStatusChange(this IGuardClause guardClause, CartStatus oldStatus, CartStatus newStatus)
         {
             if (oldStatus == newStatus)
             {
