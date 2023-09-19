@@ -4,7 +4,6 @@ using System.Text.Json;
 
 namespace ShoppingCart.Api.Middleware
 {
-    //TODO fix this
     public class ExceptionMiddleware : IMiddleware
     {
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
@@ -23,18 +22,14 @@ namespace ShoppingCart.Api.Middleware
 
                 errorResult.Messages.Add(exception.Message);
 
-                switch (exception)
+                errorResult.StatusCode = exception switch
                 {
-                    case ArgumentException:
-                        errorResult.StatusCode = (int)HttpStatusCode.BadRequest;
-                        break;
-
-                    default:
-                        errorResult.StatusCode = (int)HttpStatusCode.InternalServerError;
-                        break;
-                }
+                    ArgumentException => (int)HttpStatusCode.BadRequest,
+                    _ => (int)HttpStatusCode.InternalServerError,
+                };
 
                 var response = context.Response;
+
                 if (!response.HasStarted)
                 {
                     response.ContentType = "application/json";

@@ -15,6 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AddCartCommand).Assembly));
 builder.Services.AddTransient(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
+builder.Services.AddTransient<ExceptionMiddleware>();
 
 builder.Services.AddAutoMapper(
     typeof(Program).Assembly,
@@ -38,7 +39,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.UseMiddleware<ExceptionMiddleware>();
 
-//app.MapControllers();
 app.MapEndpoints();
 
 app.Run();

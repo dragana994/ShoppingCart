@@ -41,7 +41,7 @@ namespace ShoppingCart.BusinessLogic.Tests.EndpointTests
 
             var result = await _client.PostAsJsonAsync("/carts", request);
 
-            Assert.Equal(HttpStatusCode.InternalServerError, result.StatusCode);
+            Assert.Equal(HttpStatusCode.BadRequest, result.StatusCode);
 
         }
     }
