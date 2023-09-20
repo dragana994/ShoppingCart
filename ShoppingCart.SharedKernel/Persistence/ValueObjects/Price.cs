@@ -1,8 +1,6 @@
-﻿using ShoppingCart.SharedKernel;
-
-namespace ShoppingCart.SharedKernel.Persistence.ValueObjects
+﻿namespace ShoppingCart.SharedKernel.Persistence.ValueObjects
 {
-    public class Price : ValueObject
+    public class Price
     {
         public Price(string currency, decimal cost)
         {

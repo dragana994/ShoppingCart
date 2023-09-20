@@ -16,5 +16,13 @@ namespace ShoppingCart.Core.ValueObjects
         public string City { get; private set; }
         public string Number { get; private set; }
         public string Country { get; private set; }
+
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return Street;
+            yield return City;
+            yield return Number;
+            yield return Country;
+        }
     }
 }

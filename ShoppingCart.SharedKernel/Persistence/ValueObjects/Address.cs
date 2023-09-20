@@ -1,6 +1,6 @@
 ﻿namespace ShoppingCart.SharedKernel.Persistence.ValueObjects
 {
-    public class Address : ValueObject
+    public class Address
     {
         public Address(string street, string city, string number, string country)
         {

@@ -1,8 +1,6 @@
-﻿using ShoppingCart.SharedKernel;
-
-namespace ShoppingCart.SharedKernel.Persistence.ValueObjects
+﻿namespace ShoppingCart.SharedKernel.Persistence.ValueObjects
 {
-    public class Manufacturer : ValueObject
+    public class Manufacturer
     {
         public Manufacturer(string name)
         {

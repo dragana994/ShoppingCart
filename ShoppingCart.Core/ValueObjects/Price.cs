@@ -12,5 +12,11 @@ namespace ShoppingCart.Core.ValueObjects
 
         public string Currency { get; private set; }
         public decimal Cost { get; private set; }
+
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return Currency;
+            yield return Cost;
+        }
     }
 }
