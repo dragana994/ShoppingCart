@@ -13,7 +13,7 @@ namespace ShoppingCart.SharedKernel.Persistence
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Part> Parts { get; set; }
         public DbSet<Store> Stores { get; set; }
-        public DbSet<StoreState> StoreStates { get; set; }
+        public DbSet<StorePart> StoreParts { get; set; }
 
         protected readonly IConfiguration Configuration;
 
@@ -35,9 +35,7 @@ namespace ShoppingCart.SharedKernel.Persistence
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            var result = base.SaveChangesAsync(cancellationToken);
-
-            return result;
+            return base.SaveChangesAsync(cancellationToken);
         }
 
         public override int SaveChanges()

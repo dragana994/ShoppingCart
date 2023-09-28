@@ -2,13 +2,13 @@
 {
     public class Price
     {
-        public Price(string currency, decimal cost)
+        public Price(string currency, int cost)
         {
             Currency = currency;
             Cost = cost;
         }
 
         public string Currency { get; private set; }
-        public decimal Cost { get; private set; }
+        public int Cost { get; private set; }
     }
 }

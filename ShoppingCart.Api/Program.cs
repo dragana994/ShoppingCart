@@ -13,14 +13,15 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AddCartCommand).Assembly));
-builder.Services.AddTransient(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
-builder.Services.AddTransient<ExceptionMiddleware>();
+//builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AddCartCommand).Assembly));
+//builder.Services.AddTransient(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
+//builder.Services.AddTransient<ExceptionMiddleware>();
 
-builder.Services.AddAutoMapper(
+/*builder.Services.AddAutoMapper(
     typeof(Program).Assembly,
-    typeof(AddCartCommand).Assembly);
-builder.Services.AddDbContext<AppDbContext>(options =>
+    typeof(AddCartCommand).Assembly);*/
+
+builder.Services.AddDbContext<ShoppingCart.SharedKernel.Persistence.AppDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
@@ -37,7 +38,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-app.UseMiddleware<ExceptionMiddleware>();
+//app.UseMiddleware<ExceptionMiddleware>();
 
 app.MapEndpoints();
 

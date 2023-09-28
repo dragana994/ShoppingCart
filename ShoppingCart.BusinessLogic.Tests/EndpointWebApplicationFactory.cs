@@ -14,19 +14,19 @@ namespace ShoppingCart.BusinessLogic.Tests
             {
                 var descriptor = services.SingleOrDefault(
                     d => d.ServiceType ==
-                        typeof(DbContextOptions<AppDbContext>));
+                        typeof(DbContextOptions<ShoppingCartContext>));
 
                 if (descriptor != null)
                     services.Remove(descriptor);
 
-                services.AddDbContext<AppDbContext>(options =>
+                services.AddDbContext<ShoppingCartContext>(options =>
                 {
                     options.UseInMemoryDatabase("InMemoryShoppingCartTest");
                 });
 
                 var sp = services.BuildServiceProvider();
                 using (var scope = sp.CreateScope())
-                using (var appContext = scope.ServiceProvider.GetRequiredService<AppDbContext>())
+                using (var appContext = scope.ServiceProvider.GetRequiredService<ShoppingCartContext>())
                 {
                     try
                     {

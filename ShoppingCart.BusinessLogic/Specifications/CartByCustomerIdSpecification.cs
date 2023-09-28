@@ -1,5 +1,5 @@
 ﻿using ShoppingCart.Core.CartAggregate;
-using ShoppingCart.Infrastracture.Specification;
+using ShoppingCart.SharedKernel.Specification;
 
 namespace ShoppingCart.BusinessLogic.Specifications
 {

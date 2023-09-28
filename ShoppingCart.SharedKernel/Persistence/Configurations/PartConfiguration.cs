@@ -16,14 +16,75 @@ namespace ShoppingCart.SharedKernel.Persistence.Configurations
 
             builder.OwnsOne(x => x.Price, x =>
             {
-                x.Property(pp => pp.Cost).HasColumnName("PriceCost").IsRequired();
-                x.Property(pp => pp.Currency).HasColumnName("PriceCurrency").HasMaxLength(5).IsRequired();
+                x.Property(pp => pp.Cost)
+                .HasPrecision(10, 3)
+                .IsRequired();
+
+                x.Property(pp => pp.Currency).
+                HasMaxLength(5)
+                .IsRequired();
+
+                x.HasData(
+                    new
+                    {
+                        PartId = 1,
+                        Cost = 10,
+                        Currency = "BAM"
+                    },
+                     new
+                     {
+                         PartId = 2,
+                         Cost = 20,
+                         Currency = "BAM"
+                     },
+                     new
+                     {
+                         PartId = 3,
+                         Cost = 30,
+                         Currency = "BAM"
+                     });
             });
 
             builder.OwnsOne(x => x.Manufacturer, x =>
             {
-                x.Property(pp => pp.Name).HasColumnName("ManufacturerName").HasMaxLength(50);
+                x.Property(pp => pp.Name)
+                .HasMaxLength(50);
+
+                x.HasData(
+                    new
+                    {
+                        PartId = 1,
+                        Name = "Manufacturer_1"
+                    },
+                     new
+                     {
+                         PartId = 2,
+                         Name = "Manufacturer_2"
+                     },
+                     new
+                     {
+                         PartId = 3,
+                         Name = "Manufacturer_3"
+                     });
             });
+
+            builder.HasData(
+                new Part
+                {
+                    Id = 1,
+                    Name = "Part_1"
+                },
+                 new Part
+                 {
+                     Id = 2,
+                     Name = "Part_2"
+                 },
+                  new Part
+                  {
+                      Id = 3,
+                      Name = "Part_3"
+                  }
+                );
         }
     }
 }

@@ -8,7 +8,7 @@ namespace ShoppingCart.SharedKernel.Persistence.Entities
         public Manufacturer Manufacturer { get; set; }
         public Price Price { get; set; }
 
-        public virtual ICollection<StoreState> StoreStates { get; set; }
+        public virtual ICollection<StorePart> StoreStates { get; set; }
         public virtual ICollection<CartItem> CartItems { get; set; }
     }
 }

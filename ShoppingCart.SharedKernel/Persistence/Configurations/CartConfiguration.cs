@@ -17,9 +17,6 @@ namespace ShoppingCart.SharedKernel.Persistence.Configurations
                .HasConversion<int>()
                .IsRequired();
 
-            builder.Property(x => x.Sum)
-                .IsRequired();
-
             builder.HasOne(s => s.Employee)
                 .WithMany(g => g.Carts)
                 .HasForeignKey(s => s.EmployeeId);

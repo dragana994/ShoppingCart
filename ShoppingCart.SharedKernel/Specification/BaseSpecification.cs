@@ -1,7 +1,7 @@
 ﻿using ShoppingCart.SharedKernel.Interfaces;
 using System.Linq.Expressions;
 
-namespace ShoppingCart.Infrastracture.Specification
+namespace ShoppingCart.SharedKernel.Specification
 {
     public class BaseSpecification<T> : ISpecification<T>
     {

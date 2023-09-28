@@ -1,6 +1,6 @@
 ﻿namespace ShoppingCart.SharedKernel.Persistence.Entities
 {
-    public class StoreState : BaseEntity<int>
+    public class StorePart : BaseEntity<int>
     {
         public int StoreId { get; set; }
         public int PartId { get; set; }

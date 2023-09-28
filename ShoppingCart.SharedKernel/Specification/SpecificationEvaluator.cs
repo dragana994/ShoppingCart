@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ShoppingCart.SharedKernel.Interfaces;
 
-namespace ShoppingCart.Infrastracture.Specification
+namespace ShoppingCart.SharedKernel.Specification
 {
     public class SpecificationEvaluator<TEntity> where TEntity : class
     {

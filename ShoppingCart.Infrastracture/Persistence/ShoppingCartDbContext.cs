@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using ShoppingCart.Core.CartAggregate;
 using ShoppingCart.Core.Entities;
 using ShoppingCart.SharedKernel;
@@ -8,7 +7,7 @@ using System.Reflection;
 
 namespace ShoppingCart.Infrastracture.Persistence
 {
-    public class AppDbContext : DbContext
+    public class ShoppingCartContext : DbContext
     {
         public DbSet<Cart> Carts { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
@@ -19,7 +18,12 @@ namespace ShoppingCart.Infrastracture.Persistence
 
         private readonly IMediator _mediator;
 
-        public AppDbContext(DbContextOptions options, IMediator mediator) : base(options)
+        public ShoppingCartContext(DbContextOptions options, IMediator mediator) : base(options)
+        {
+            _mediator = mediator;
+        }
+
+        public ShoppingCartContext(IMediator mediator)
         {
             _mediator = mediator;
         }
