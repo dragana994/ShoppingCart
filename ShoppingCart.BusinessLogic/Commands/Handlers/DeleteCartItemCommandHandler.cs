@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
 using ShoppingCart.Core.CartAggregate;
-using ShoppingCart.Core.Exceptions;
+using ShoppingCart.Infrastracture.Persistence;
+using ShoppingCart.SharedKernel.Exceptions;
 using ShoppingCart.SharedKernel.Interfaces;
 
 namespace ShoppingCart.BusinessLogic.Commands.Handlers
@@ -9,9 +10,9 @@ namespace ShoppingCart.BusinessLogic.Commands.Handlers
     public class DeleteCartItemCommandHandler : IRequestHandler<DeleteCartItemCommand, Unit>
     {
         private readonly IMapper _mapper;
-        private readonly IGenericRepository<Cart, Guid> _cartRepository;
+        private readonly IGenericRepository<Cart, Guid, ShoppingCartDbContext> _cartRepository;
 
-        public DeleteCartItemCommandHandler(IMapper mapper, IGenericRepository<Cart, Guid> cartRepository)
+        public DeleteCartItemCommandHandler(IMapper mapper, IGenericRepository<Cart, Guid, ShoppingCartDbContext> cartRepository)
         {
             _mapper = mapper;
             _cartRepository = cartRepository;

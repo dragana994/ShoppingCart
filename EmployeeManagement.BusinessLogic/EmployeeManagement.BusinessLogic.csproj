@@ -8,11 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="MediatR" Version="12.0.1" />
+    <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="17.3.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ShoppingCart.Infrastracture\ShoppingCart.Infrastracture.csproj" />
+    <ProjectReference Include="..\EmployeeManagement.Infrastracture\EmployeeManagement.Infrastracture.csproj" />
   </ItemGroup>
 
 </Project>

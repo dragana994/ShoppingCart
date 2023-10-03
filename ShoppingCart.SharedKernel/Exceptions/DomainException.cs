@@ -1,4 +1,4 @@
-﻿namespace ShoppingCart.Core.Exceptions
+﻿namespace ShoppingCart.SharedKernel.Exceptions
 {
     public class DomainException : Exception
     {

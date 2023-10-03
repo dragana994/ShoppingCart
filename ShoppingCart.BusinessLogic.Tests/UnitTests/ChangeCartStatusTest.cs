@@ -3,6 +3,7 @@ using ShoppingCart.BusinessLogic.Commands;
 using ShoppingCart.BusinessLogic.Commands.Handlers;
 using ShoppingCart.Core.CartAggregate;
 using ShoppingCart.Core.Enums;
+using ShoppingCart.Infrastracture.Persistence;
 using ShoppingCart.SharedKernel.Interfaces;
 
 namespace ShoppingCart.BusinessLogic.Tests.UnitTests
@@ -10,11 +11,11 @@ namespace ShoppingCart.BusinessLogic.Tests.UnitTests
     public class ChangeCartStatusTest : IClassFixture<FixtureTest>
     {
         private readonly ChangeCartStatusCommandHandler commandHandler;
-        private readonly IGenericRepository<Cart, Guid> repository;
+        private readonly IGenericRepository<Cart, Guid, ShoppingCartDbContext> repository;
 
         public ChangeCartStatusTest(FixtureTest fixture)
         {
-            repository = Substitute.For<IGenericRepository<Cart, Guid>>();
+            repository = Substitute.For<IGenericRepository<Cart, Guid, ShoppingCartDbContext>>();
             commandHandler = new ChangeCartStatusCommandHandler(repository);
         }
 

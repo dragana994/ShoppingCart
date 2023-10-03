@@ -7,9 +7,9 @@ using ShoppingCart.BusinessLogic.Queries;
 
 namespace ShoppingCart.Api.Extensions
 {
-    public static class EndpointExtensions
+    public static class ShoppingCartEndpointExtensions
     {
-        public static void MapEndpoints(this WebApplication app)
+        public static void MapShoppingCartEndpoints(this WebApplication app)
         {
             //Cart
             app.MapPost("/carts", async (IMediator mediator, IMapper mapper, [FromBody] AddCartRequest request) =>
@@ -80,7 +80,7 @@ namespace ShoppingCart.Api.Extensions
             });
             app.MapGet("/carts/{cartId}/cartItems", async (IMediator mediator, Guid cartId) =>
             {
-                var cartItems = await mediator.Send(new GetCartItemByCartIdQuery { CartId = cartId });
+                var cartItems = await mediator.Send(new GetCartItemsByCartIdQuery { CartId = cartId });
 
                 return Results.Ok(cartItems);
             });

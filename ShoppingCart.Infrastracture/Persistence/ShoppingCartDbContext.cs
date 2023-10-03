@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace ShoppingCart.Infrastracture.Persistence
 {
-    public class ShoppingCartContext : DbContext
+    public class ShoppingCartDbContext : DbContext
     {
         public DbSet<Cart> Carts { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
@@ -18,12 +18,12 @@ namespace ShoppingCart.Infrastracture.Persistence
 
         private readonly IMediator _mediator;
 
-        public ShoppingCartContext(DbContextOptions options, IMediator mediator) : base(options)
+        public ShoppingCartDbContext(DbContextOptions<ShoppingCartDbContext> options, IMediator mediator) : base(options)
         {
             _mediator = mediator;
         }
 
-        public ShoppingCartContext(IMediator mediator)
+        public ShoppingCartDbContext(IMediator mediator)
         {
             _mediator = mediator;
         }

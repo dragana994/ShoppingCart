@@ -2,7 +2,8 @@
 using MediatR;
 using ShoppingCart.Core.CartAggregate;
 using ShoppingCart.Core.Enums;
-using ShoppingCart.Core.Exceptions;
+using ShoppingCart.Infrastracture.Persistence;
+using ShoppingCart.SharedKernel.Exceptions;
 using ShoppingCart.SharedKernel.Interfaces;
 
 namespace ShoppingCart.BusinessLogic.Commands.Handlers
@@ -10,9 +11,9 @@ namespace ShoppingCart.BusinessLogic.Commands.Handlers
     public class DeleteCartCommandHandler : IRequestHandler<DeleteCartCommand, Unit>
     {
         private readonly IMapper _mapper;
-        private readonly IGenericRepository<Cart, Guid> _repository;
+        private readonly IGenericRepository<Cart, Guid, ShoppingCartDbContext> _repository;
 
-        public DeleteCartCommandHandler(IMapper mapper, IGenericRepository<Cart, Guid> repository)
+        public DeleteCartCommandHandler(IMapper mapper, IGenericRepository<Cart, Guid, ShoppingCartDbContext> repository)
         {
             _mapper = mapper;
             _repository = repository;

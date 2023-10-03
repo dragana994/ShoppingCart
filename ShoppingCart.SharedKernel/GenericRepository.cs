@@ -1,15 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ShoppingCart.SharedKernel;
 using ShoppingCart.SharedKernel.Interfaces;
 using ShoppingCart.SharedKernel.Specification;
 
-namespace ShoppingCart.Infrastracture.Persistence
+namespace ShoppingCart.SharedKernel
 {
-    public class GenericRepository<T, TId> : IGenericRepository<T, TId> where T : BaseEntity<TId>
+    public class GenericRepository<T, TId, TRepository> : IGenericRepository<T, TId, TRepository> where T : BaseEntity<TId> where TRepository : DbContext
     {
-        protected readonly ShoppingCartContext _context;
+        protected readonly TRepository _context;
 
-        public GenericRepository(ShoppingCartContext context)
+        public GenericRepository(TRepository context)
         {
             _context = context;
         }

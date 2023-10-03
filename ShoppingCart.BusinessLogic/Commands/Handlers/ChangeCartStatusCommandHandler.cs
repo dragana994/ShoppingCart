@@ -1,15 +1,16 @@
 ﻿using MediatR;
 using ShoppingCart.Core.CartAggregate;
-using ShoppingCart.Core.Exceptions;
+using ShoppingCart.Infrastracture.Persistence;
+using ShoppingCart.SharedKernel.Exceptions;
 using ShoppingCart.SharedKernel.Interfaces;
 
 namespace ShoppingCart.BusinessLogic.Commands.Handlers
 {
     public class ChangeCartStatusCommandHandler : IRequestHandler<ChangeCartStatusCommand, Cart>
     {
-        private readonly IGenericRepository<Cart, Guid> _repository;
+        private readonly IGenericRepository<Cart, Guid, ShoppingCartDbContext> _repository;
 
-        public ChangeCartStatusCommandHandler(IGenericRepository<Cart, Guid> repository)
+        public ChangeCartStatusCommandHandler(IGenericRepository<Cart, Guid, ShoppingCartDbContext> repository)
         {
             _repository = repository;
         }

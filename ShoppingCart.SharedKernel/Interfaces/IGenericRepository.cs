@@ -1,6 +1,8 @@
-﻿namespace ShoppingCart.SharedKernel.Interfaces
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace ShoppingCart.SharedKernel.Interfaces
 {
-    public interface IGenericRepository<T, TId> where T : BaseEntity<TId>
+    public interface IGenericRepository<T, TId, TRepository> where T : BaseEntity<TId> where TRepository : DbContext
     {
         Task<T?> GetByIdAsync(TId id);
         Task<List<T>> GetListAsync();

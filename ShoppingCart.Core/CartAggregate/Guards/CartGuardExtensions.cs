@@ -1,6 +1,6 @@
 ﻿using Ardalis.GuardClauses;
 using ShoppingCart.Core.Enums;
-using ShoppingCart.Core.Exceptions;
+using ShoppingCart.SharedKernel.Exceptions;
 
 namespace ShoppingCart.Core.CartAggregate.Guards
 {

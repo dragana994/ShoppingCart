@@ -2,6 +2,7 @@ using Moq;
 using ShoppingCart.BusinessLogic.Commands;
 using ShoppingCart.BusinessLogic.Commands.Handlers;
 using ShoppingCart.Core.CartAggregate;
+using ShoppingCart.Infrastracture.Persistence;
 using ShoppingCart.SharedKernel.Interfaces;
 
 namespace ShoppingCart.BusinessLogic.Tests.UnitTests
@@ -9,7 +10,7 @@ namespace ShoppingCart.BusinessLogic.Tests.UnitTests
     public class AddCartTest : IClassFixture<FixtureTest>
     {
         private readonly AddCartCommandHandler commandHandler;
-        private readonly Mock<IGenericRepository<Cart, Guid>> _mockRepository = new();
+        private readonly Mock<IGenericRepository<Cart, Guid, ShoppingCartDbContext>> _mockRepository = new();
 
         public AddCartTest(FixtureTest fixture)
         {
