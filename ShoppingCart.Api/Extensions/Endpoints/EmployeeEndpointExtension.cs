@@ -5,9 +5,9 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingCart.Api.Requests;
 
-namespace ShoppingCart.Api.Extensions
+namespace ShoppingCart.Api.Extensions.Endpoints
 {
-    public static class EmployeeEndpointExtensions
+    public static class EmployeeEndpointExtension
     {
         public static void MapEmployeeEndpoints(this WebApplication app)
         {

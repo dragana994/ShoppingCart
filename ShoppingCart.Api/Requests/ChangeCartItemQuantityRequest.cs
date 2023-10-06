@@ -1,6 +1,8 @@
-﻿namespace ShoppingCart.Api.Requests
+﻿using ShoppingCart.SharedKernel;
+
+namespace ShoppingCart.Api.Requests
 {
-    public class ChangeCartItemQuantityRequest
+    public class ChangeCartItemQuantityRequest : BaseRequest
     {
         public Guid CartId { get; set; }
         public Guid CartItemId { get; set; }

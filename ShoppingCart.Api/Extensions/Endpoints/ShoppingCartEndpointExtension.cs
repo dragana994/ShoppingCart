@@ -5,9 +5,9 @@ using ShoppingCart.Api.Requests;
 using ShoppingCart.BusinessLogic.Commands;
 using ShoppingCart.BusinessLogic.Queries;
 
-namespace ShoppingCart.Api.Extensions
+namespace ShoppingCart.Api.Extensions.Endpoints
 {
-    public static class ShoppingCartEndpointExtensions
+    public static class ShoppingCartEndpointExtension
     {
         public static void MapShoppingCartEndpoints(this WebApplication app)
         {

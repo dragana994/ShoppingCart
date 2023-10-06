@@ -1,24 +1,18 @@
-﻿using MediatR;
+﻿using CustomerManagement.Core.Entities;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
-using ShoppingCart.Core.CartAggregate;
-using ShoppingCart.Core.Entities;
 using ShoppingCart.SharedKernel;
 using System.Reflection;
 
-namespace ShoppingCart.Infrastracture.Persistence
+namespace CustomerManagement.Infrastracture.Persistence
 {
-    public class ShoppingCartDbContext : DbContext
+    public class CustomerDbContext : DbContext
     {
-        public DbSet<Cart> Carts { get; set; }
-        public DbSet<CartItem> CartItems { get; set; }
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Employee> Employees { get; set; }
-        public DbSet<Part> Parts { get; set; }
-        public DbSet<Store> Stores { get; set; }
+        public DbSet<Customer> Employees { get; set; }
 
         private readonly IMediator _mediator;
 
-        public ShoppingCartDbContext(DbContextOptions<ShoppingCartDbContext> options, IMediator mediator) : base(options)
+        public CustomerDbContext(DbContextOptions<CustomerDbContext> options, IMediator mediator) : base(options)
         {
             _mediator = mediator;
         }

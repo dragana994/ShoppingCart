@@ -1,10 +1,6 @@
-using EmployeeManagement.BusinessLogic.Commands;
-using EmployeeManagement.Infrastracture.Persistence;
-using Microsoft.EntityFrameworkCore;
-using ShoppingCart.Api.Extensions;
+using ShoppingCart.Api.Extensions.Endpoints;
+using ShoppingCart.Api.Extensions.Services;
 using ShoppingCart.Api.Middleware;
-using ShoppingCart.BusinessLogic.Commands;
-using ShoppingCart.Infrastracture.Persistence;
 using ShoppingCart.SharedKernel;
 using ShoppingCart.SharedKernel.Interfaces;
 
@@ -15,26 +11,15 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AddCartCommand).Assembly));
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AddEmployeeCommand).Assembly));
+builder.AddCustomerConfiguration();
+builder.AddEmployeeConfiguration();
+builder.AddShoppingCartConfiguration();
 
 builder.Services.AddTransient(typeof(IGenericRepository<,,>), typeof(GenericRepository<,,>));
 
 builder.Services.AddTransient<ExceptionMiddleware>();
 
-builder.Services.AddAutoMapper(
-    typeof(Program).Assembly,
-    typeof(AddCartCommand).Assembly,
-    typeof(AddEmployeeCommand).Assembly);
-
-builder.Services.AddDbContext<ShoppingCartDbContext>(options =>
-{
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
-builder.Services.AddDbContext<EmployeeDbContext>(options =>
-{
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 var app = builder.Build();
 
@@ -52,6 +37,7 @@ app.UseMiddleware<ExceptionMiddleware>();
 
 app.MapShoppingCartEndpoints();
 app.MapEmployeeEndpoints();
+app.MapCustomerEndpoints();
 
 app.Run();
 
